@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head}"></head>
+
+<body>
+<div style="text-align: center;">
+    <h1>Rayal Park Hotel</h1>
+</div>
+<div class="m-2">
+    <a th:href="@{/ShowHotelForm}" class="btn btn-primary btn-sm mb-3" style="margin-left: 1150px;" >Book Room</a>
+</div>
+<div th:if="${message}" th:class="'alert alert-' + ${color} + ' text-center'">
+    [[${message}]]
+</div>
+<div th:each="hotel : ${hotels}">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Room Name   : <span th:text="${hotel.roomName}"></span></h5>
+            <p class="card-title">Applicant Name   : <span th:text="${hotel.applicantName}"></span></p>
+            <p class="card-text">Gender       : <span th:text="${hotel.applicantGender}"></span></p>
+            <p class="card-text">Contact      : <span th:text="${hotel.applicantContact}"></span></p>
+            <p class="card-text">Stay Duration      : <span th:text="${hotel.stay_Duration}"></span></p>
+            <p class="card-text">Stay Purpose : <span th:text="${hotel.stayPurpose}"></span></p>
+            <p class="card-text">Number of Guest        : <span th:text="${hotel.guestNum}"></span></p>
+
+
+            <div class="text-right">
+                <a class="btn btn-primary" th:href="@{'/updateHotelRecord/' + ${hotel.id}}">Update</a>
+                <a class="btn btn-danger" th:href="@{'/deleteHotel/' + ${hotel.id}}"
+                   th:onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

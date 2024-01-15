@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head}"></head>
+
+<body>
+<h1>Book Room</h1>
+<div class="container mt-3">
+    <a th:href="@{/HotelHomepage}" class="btn btn-primary btn-sm" style="margin-left: 1000px;">Back Home</a>
+</div>
+<form th:action="@{/saveHotel}" th:method="post" th:object="${hotel}" class="container mt-3">
+    <div class="border p-3">
+        <div class="form-group row">
+            <label th:for="applicantName" class="col-sm-4 col-form-label required">Applicant Name</label>
+            <div class="col-sm-8">
+                <input type="text" th:field="*{applicantName}" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label th:for="roomName" class="col-sm-4 col-form-label required">Room Name</label>
+            <div class="col-sm-8">
+                <select th:field="*{roomName}" class="form-control">
+                    <option value="null" disabled>Room Name</option>
+                    <option value="Executive Cityscape Room">Executive Cityscape Room($199/night)</option>
+                    <option value="Deluxe Ocean View">Deluxe Ocean View($299/night)</option>
+                    <option value="Family Garden Retreat">Family Garden Retreat($249/night)</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label th:for="applicantGender" class="col-sm-4 col-form-label">Gender</label>
+            <div class="col-sm-8">
+                <select th:field="*{applicantGender}" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label th:for="applicantContact" class="col-sm-4 col-form-label">Contact</label>
+            <div class="col-sm-8">
+                <input type="text" th:field="*{applicantContact}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label th:for="stay_Duration" class="col-sm-4 col-form-label">Stay Duration</label>
+            <div class="col-sm-8">
+                <input type="text" th:field="*{stay_Duration}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label th:for="stayPurpose" class="col-sm-4 col-form-label">Stay Purpose</label>
+            <div class="col-sm-8">
+                <input type="text" th:field="*{stayPurpose}" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label th:for="guestNum" class="col-sm-4 col-form-label">Number of Guest</label>
+            <div class="col-sm-8">
+                <input type="text" th:field="*{guestNum}" th:value="${hotel.guestNum == 0 ? 'none' : hotel.guestNum}" class="form-control">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-2">Submit</button>
+            <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/HotelHomepage}]]";
+    }
+</script>
+</body>
+</html>
